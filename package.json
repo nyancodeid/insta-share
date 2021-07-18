@@ -1,0 +1,22 @@
+{
+  "name": "nft-share",
+  "version": "0.0.1",
+  "description": "NFT Share File",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "notyf": "^3.10.0",
+    "pinia": "^2.0.0-beta.5",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.10"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.5",
+    "@vue/compiler-sfc": "^3.0.5",
+    "sass": "^1.35.2",
+    "vite": "^2.4.2"
+  }
+}
