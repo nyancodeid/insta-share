@@ -88,7 +88,6 @@ export default {
           notyf.success(`${successfully.length} files successfully processed.`);
         }
       } catch (error) {
-        console.error(error)
         notyf.error(`Opss!, something error while processing your files.`);
       } finally {
         finished.value = 0;

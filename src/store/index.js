@@ -23,6 +23,10 @@ export const useStore = defineStore({
     },
     addResults(...files) {
       this.results.push(...files);
+      this.results = this.results.filter(({ cid }) => !!cid);
+
+      db.data.results = [ ...this.results ];
+
       db.write();
     }
   }
