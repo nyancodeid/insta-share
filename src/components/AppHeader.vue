@@ -1,8 +1,8 @@
 <template>
   <header id="header">
     <div class="header-title">
-      <h1>InstaShare</h1>
-      <span>Instant File Sharing with IPFS Protocol</span>
+      <h1>InstaShare<img class="icon" src="https://fav.farm/⚡" alt="⚡"/></h1>
+      <span>Instant File Sharing powered by IPFS Protocol</span>
     </div>
     <div class="header-menu">
       <nav class="header-navbar">
@@ -33,7 +33,17 @@ export default {
 
   .header-title {
     h1 {
-      margin: 0;
+      font-size: 1.7rem;
+      margin: 0 0 8px 0;
+
+      img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+      }
+    }
+    span {
+      font-size: .9rem;
     }
   }
 
