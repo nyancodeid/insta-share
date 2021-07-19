@@ -31,3 +31,21 @@ export const copyToClipboard = (value) => {
   document.execCommand("copy");
   textArea.remove();
 };
+
+export const isVideo = (type) => {
+  return type.indexOf("video") >= 0;
+}
+
+/**
+ *
+ * @param {String} cid
+ * @param file
+ * @returns {String}
+ */
+export const generateLink = ({ cid, file }) => {
+  if (isVideo(file.type)) {
+    return `https://${cid}.ipfs.dweb.link`;
+  }
+
+  return `https://cloudflare-ipfs.com/ipfs/${cid}`
+}
