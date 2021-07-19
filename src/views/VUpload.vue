@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {provide} from "vue";
+import { provide } from "vue";
 import { Notyf } from "notyf";
 
 import PanelUpload from "@src/components/VUpload/PanelUpload.vue";
