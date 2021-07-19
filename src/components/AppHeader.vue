@@ -6,7 +6,11 @@
     </div>
     <div class="header-menu">
       <nav class="header-navbar">
-        <a href="#github">Github</a>
+        <router-link :to="{ name: 'home' }" active-class="active" exact
+        >Home</router-link
+        >
+
+        <a href="https://github.com/nyancodeid/insta-share" target="_blank">Github</a>
 
         <router-link :to="{ name: 'about' }" active-class="active" exact
         >About</router-link

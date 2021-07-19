@@ -6,7 +6,7 @@ const VAbout = () => import("@src/views/VAbout.vue");
 const routes = [
   {
     path: "/",
-    name: "upload",
+    name: "home",
     component: VUpload
   },
   {
