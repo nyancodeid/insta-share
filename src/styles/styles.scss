@@ -54,6 +54,10 @@ body,
   }
 }
 
+.notyf .notyf__message {
+  font-size: .8rem;
+}
+
 @media only screen and (max-width: 768px) {
   #app {
     padding: 1rem;
