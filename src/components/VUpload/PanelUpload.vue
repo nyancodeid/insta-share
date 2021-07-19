@@ -1,7 +1,7 @@
 <template>
   <section id="panel-upload">
     <div class="content panel-upload--content">
-      <div class="panel-upload--dropzone" @drop.prevent="onDropHandler" @dragover.prevent>
+      <div class="panel-upload--dropzone" :class="{ active: isDragged }" @dragenter="onDragEnter" @dragleave="onDragLeave" @drop.prevent="onDropHandler" @dragover.prevent>
         <input type="file" multiple ref="file" @change="onFileChangedHandler" />
 
         <div class="dropzone-label" @click="openSelectFile">
@@ -11,7 +11,7 @@
           <div class="dropzone-is-loading" :class="{ active: (fileCount > 0) }">
             <div class="dropzone-loading--bar"></div>
           </div>
-          <span v-show="(fileCount > 0)">{{ (fileCount - finished) }} of {{ fileCount }} being processed</span>
+          <span v-show="(fileCount > 0)">{{ (fileCount - finished) }} of {{ fileCount }} files being transfered.</span>
         </div>
 
         <div class="dropzone-details">
@@ -24,27 +24,36 @@
 </template>
 
 <script>
-import {computed, inject, reactive, ref} from "vue";
+import { computed, inject, reactive, ref } from "vue";
 import { useStore } from "@src/store";
 import { uploadBlob } from "@src/services/nft.js"
-import {fileSize} from "@src/services/helpers";
+import { fileSize } from "@src/services/helpers";
 
 export default {
   name: "PanelUpload",
   setup() {
     const notyf = inject("notyf");
     const file = ref(null);
+    const isDragged = ref(false);
     const finished = ref(0);
 
     const store = useStore();
 
     const onDropHandler = ($event) => {
+      isDragged.value = false;
+
       file.value.files = $event.dataTransfer.files;
 
       onFileChangedHandler();
     }
     const openSelectFile = () => {
       file.value.click();
+    }
+    const onDragEnter = () => {
+      isDragged.value = true;
+    }
+    const onDragLeave = ($event) => {
+      isDragged.value = false;
     }
 
     const uploadFileHandler = (file) => {
@@ -92,7 +101,10 @@ export default {
       file,
       fileCount,
       result,
+      isDragged,
       fileSize,
+      onDragEnter,
+      onDragLeave,
       onDropHandler,
       openSelectFile,
       onFileChangedHandler,
@@ -123,6 +135,16 @@ section#panel-upload {
     align-items: center;
     justify-content: center;
 
+    &.active {
+      > * {
+        pointer-events: none;
+      }
+
+      .dropzone-label {
+        background-color: rgba(0, 0, 0, .2);
+      }
+    }
+
     input {
       display: none;
     }
@@ -130,6 +152,10 @@ section#panel-upload {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: .8rem;
+      border-radius: .5rem;
+      text-align: center;
+      width: 80%;
 
       svg {
         height: 48px;
@@ -166,7 +192,7 @@ section#panel-upload {
       width: 150px;
       background-color: rgba(0, 0, 0, .25);
       border-radius: 2px;
-      margin: 1.5rem 0 1rem 0;
+      margin: 1rem 0 1rem 0;
       overflow: hidden;
 
       &.active {
