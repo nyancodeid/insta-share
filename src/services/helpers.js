@@ -18,3 +18,16 @@ export const fileSize = (bytes, si=false, dp=1) => {
 
   return bytes.toFixed(dp) + ' ' + units[u];
 }
+
+/**
+ * Copy text to clipboard
+ * @param {String} value
+ */
+export const copyToClipboard = (value) => {
+  const textArea = document.createElement("textarea");
+  textArea.value = value;
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  textArea.remove();
+};
