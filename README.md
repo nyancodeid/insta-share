@@ -26,3 +26,9 @@ $ npm run dev
 # build 
 $ npm run build
 ```
+
+## Screenshot
+
+<p align="center">
+    <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreiafgyhsgn6j4wfpqxzxmy24kd2mmbkxqrgija25sv7z5ij7t5sige" style="width: 80%" />
+</p>
