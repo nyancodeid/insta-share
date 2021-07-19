@@ -59,6 +59,13 @@ export default {
     const uploadFileHandler = (file) => {
       return uploadBlob(file).then(result => {
         finished.value++;
+
+        const [ isError, _ ] = result;
+
+        if (isError) {
+          notyf.error(isError.toString());
+        }
+
         return result;
       });
     }
@@ -75,7 +82,11 @@ export default {
 
         file.value.value = null;
 
-        notyf.success(`${results.length} files successfully processed.`);
+        const successfully = results.filter(([error, file]) => !error);
+
+        if (successfully.length > 0) {
+          notyf.success(`${successfully.length} files successfully processed.`);
+        }
       } catch (error) {
         console.error(error)
         notyf.error(`Opss!, something error while processing your files.`);

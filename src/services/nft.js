@@ -12,12 +12,18 @@ export const uploadBlob = async (file) => {
   const token = PUBLIC_KEY;
   const client = new NFTStorage({ token });
 
+  let detail = getCidDetail({ cid: null, file });
+
+  // Max 50MB Upload
+  if (file.size > 52428800) {
+    return [ new Error(`Maximum file size to be upload is 50 MB`), detail ];
+  }
+
   try {
     const cid = await client.storeBlob(file);
-    const detail = getCidDetail({ cid, file });
+    detail = getCidDetail({ cid, file });
     return [ false, detail ];
   } catch (error) {
-    const detail = getCidDetail({ cid: null, file });
     return [ error, detail ];
   }
 }
