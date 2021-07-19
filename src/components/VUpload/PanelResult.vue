@@ -80,7 +80,7 @@ section#panel-result {
         background-color: rgba(0, 0, 0, 0.2);
 
         .item-icon {
-          padding: .5rem;
+          padding: .5rem .5rem .5rem 0;
         }
         .item-detail {
           display: flex;
@@ -93,6 +93,8 @@ section#panel-result {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            margin-bottom: .4rem;
           }
           .item-detail--subtitle {
             font-size: .7rem;
@@ -101,10 +103,12 @@ section#panel-result {
         .item-action {
           display: flex;
           align-items: center;
-          padding: .5rem;
+          padding: .5rem 0 .5rem .5rem;
 
           .icon {
-            margin-right: .3rem;
+            &:not(:last-child) {
+              margin-right: .3rem;
+            }
 
             &.icon-open-link {
               width: 20px;
