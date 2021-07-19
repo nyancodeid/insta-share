@@ -21,21 +21,27 @@
 </template>
 
 <script>
+import { computed } from "vue";
+
 import { useStore } from "@src/store";
-import {fileSize} from "@src/services/helpers";
-import {computed} from "vue";
+import { fileSize, copyToClipboard } from "@src/services/helpers";
 
 export default {
   name: "PanelResult",
   setup() {
     const store = useStore();
 
-    const copyFileLink = () => {}
+    const copyFileLink = (item) => {
+      copyToClipboard(`https://cloudflare-ipfs.com/ipfs/${item.cid}`);
+    }
     const openFileLink = (item) => {
       window.open(`https://cloudflare-ipfs.com/ipfs/${item.cid}`, "_blank");
     }
 
-    const files = computed(() => store.results.slice().reverse());
+    const files = computed(() => store
+        .results.slice()
+        .reverse()
+        .filter(item => !!item.cid));
 
     return {
       files,
