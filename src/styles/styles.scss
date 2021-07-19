@@ -13,7 +13,6 @@ body {
   --contrast-color: white;
 
   background-color: var(--primary-color);
-  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
   padding: 0;
   margin: 0;
@@ -114,8 +113,24 @@ body,
           border-radius: 1rem;
           margin-bottom: 1rem;
 
+          &#about {
+            width: 100%;
+
+            p {
+              font-size: .9rem;
+            }
+          }
           &#panel-upload {
-            height: 207px;
+            height: 280px;
+          }
+          &#panel-result {
+            .panel-result--content .content-file--items .content-file--item .item-detail {
+              width: 50%;
+
+              .item-detail--title {
+                width: 95%;
+              }
+            }
           }
         }
       }
