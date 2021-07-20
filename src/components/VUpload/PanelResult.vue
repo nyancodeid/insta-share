@@ -5,7 +5,8 @@
 
       <div class="content-file--items">
         <div class="content-file--item empty" v-if="files.length === 0">
-          <span>No files.</span>
+          <span v-if="search !== ''">No results. Try other file name.</span>
+          <span v-else>List of files that you upload will appear here.</span>
         </div>
 
         <div class="content-file--item" v-for="(item, index) in files" :key="index">
