@@ -29,7 +29,7 @@ export default {
   display: flex;
   position: relative;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: .8rem;
 
   .icon-search {
     position: absolute;
@@ -42,8 +42,8 @@ export default {
     width: 100%;
     outline: none;
     border: none;
-    padding: .8rem .8rem .8rem 2.5rem;
-    border-radius: .8rem;
+    padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+    border-radius: 0.8rem;
     color: #ffffff;
     background-color: rgba(0, 0, 0, 0.2);
     transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -55,13 +55,13 @@ export default {
 
   .search-count--label {
     position: absolute;
-    right: .6rem;
+    right: 0.6rem;
     background-color: rgba(0, 0, 0, .3);
     color: #ffffff;
 
     font-size: 0.7rem;
     padding: 6px 12px;
-    border-radius: .6rem;
+    border-radius: 0.6rem;
 
     opacity: 0;
 

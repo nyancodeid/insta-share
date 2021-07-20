@@ -45,7 +45,7 @@ section#content {
     justify-content: center;
 
     height: 100%;
-
+    
     section {
       width: 414px;
       height: 414px;

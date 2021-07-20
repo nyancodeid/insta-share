@@ -100,9 +100,24 @@ section#panel-result {
     .content-file--items {
       display: flex;
       flex-direction: column;
+
       overflow-y: scroll;
-      margin-right: -0.8rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, .4) rgba(255, 255, 255, .2);
+
       height: calc(100% - 2.95rem);
+
+      &::-webkit-scrollbar {
+        width: .3rem;
+      }
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, .2);
+        border-radius: 1rem;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, .6);
+        border-radius: 1rem;
+      }
 
       .content-file--item {
         width: calc(100% - 1.6rem);
@@ -115,8 +130,9 @@ section#panel-result {
         background-color: rgba(0, 0, 0, 0.2);
 
         &.empty {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           text-align: center;
+          border-radius: 0.8rem;
         }
 
         .item-content {
