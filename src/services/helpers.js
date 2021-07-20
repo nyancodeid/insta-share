@@ -1,3 +1,10 @@
+/**
+ * File size human readble
+ * @param {Number} bytes
+ * @param {Boolean} round
+ * @param {Number} fixed decimal
+ * @returns {String}
+ **/
 export const fileSize = (bytes, si=false, dp=1) => {
   const thresh = si ? 1000 : 1024;
 
@@ -22,6 +29,7 @@ export const fileSize = (bytes, si=false, dp=1) => {
 /**
  * Copy text to clipboard
  * @param {String} value
+ * @returns {Void}
  */
 export const copyToClipboard = (value) => {
   const textArea = document.createElement("textarea");
@@ -32,12 +40,17 @@ export const copyToClipboard = (value) => {
   textArea.remove();
 };
 
+/**
+ * Check is file type is video
+ * @param {String} type
+ * @returns {Boolean}
+ **/
 export const isVideo = (type) => {
   return type.indexOf("video") >= 0;
 }
 
 /**
- *
+ * Generate IPFS Gateway link
  * @param {String} cid
  * @param file
  * @returns {String}

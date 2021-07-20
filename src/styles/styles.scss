@@ -128,11 +128,15 @@ body,
             height: 280px;
           }
           &#panel-result {
-            .panel-result--content .content-file--items .content-file--item .item-detail {
-              width: 50%;
+            .panel-result--content .content-file--items {
+              margin-right: 0;
 
-              .item-detail--title {
-                width: 95%;
+             .content-file--item .item-detail {
+                width: 50%;
+
+                .item-detail--title {
+                  width: 95%;
+                }
               }
             }
           }

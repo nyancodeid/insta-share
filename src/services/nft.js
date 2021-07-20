@@ -30,8 +30,9 @@ export const uploadBlob = async (file) => {
 
 /**
  *
- * @param {String} cid
- * @param {File} file
+ * @param {Object} params
+ * @param {String} params.cid
+ * @param {File} params.file
  */
 export const getCidDetail = ({ cid, file }) => {
   const base = {

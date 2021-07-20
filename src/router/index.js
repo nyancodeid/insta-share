@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import VUpload from "@src/views/VUpload.vue";
 
+// Async Component
 const VAbout = () => import("@src/views/VAbout.vue");
 
 const routes = [
