@@ -1,7 +1,13 @@
 <template>
   <section id="panel-result">
     <div class="panel-result--content">
+      <SearchResult :search="search" :count="files.length" @onChanged="onSearchChanged" />
+
       <div class="content-file--items">
+        <div class="content-file--item empty" v-if="files.length === 0">
+          <span>No files.</span>
+        </div>
+
         <div class="content-file--item" v-for="(item, index) in files" :key="index">
           <div class="item-content">
             <div class="item-icon">
@@ -26,36 +32,55 @@
 </template>
 
 <script>
-import {computed, inject} from "vue";
+import { ref, computed, inject } from "vue";
 
 import { useStore } from "@src/store";
 import { fileSize, copyToClipboard, generateLink } from "@src/services/helpers";
 
+import SearchResult from "@src/components/VUpload/SearchResult.vue";
+
 export default {
   name: "PanelResult",
+  components: {
+    SearchResult
+  },
   setup() {
     const notyf = inject("notyf");
     const store = useStore();
 
+    const search = ref("");
+
     const copyFileLink = (item) => {
-      copyToClipboard(generateLink(item));
+      const url = generateLink(item);
+      copyToClipboard(url);
 
       notyf.success("Copied to clipboard!");
     }
     const openFileLink = (item) => {
-      window.open(generateLink(item), "_blank");
+      const url = generateLink(item);
+      window.open(url, "_blank");
+    }
+    const onSearchChanged = ($event) => {
+      search.value = $event.target.value;
     }
 
     const files = computed(() => store
         .results.slice()
         .reverse()
-        .filter(item => !!item.cid));
+        .filter(item => !!item.cid)
+        .filter(item => {
+          if (search.value === "") return true;
+
+          return item.file.name.indexOf(search.value) >= 0;
+        }));
 
     return {
+      search,
       files,
       fileSize,
       copyFileLink,
-      openFileLink
+      openFileLink,
+      onSearchChanged
     }
   }
 }
@@ -68,23 +93,30 @@ section#panel-result {
   border-bottom-right-radius: 1rem;
 
   .panel-result--content {
-    padding: 1rem;
-    overflow-y: scroll;
-    height: calc(100% - 2rem);
+    padding: 0.8rem;
+    height: calc(100% - 1.6rem);
 
     .content-file--items {
       display: flex;
       flex-direction: column;
+      overflow-y: scroll;
+      margin-right: -0.8rem;
+      height: calc(100% - 2.95rem);
 
       .content-file--item {
-        width: calc(100% - 2rem);
-        padding: 1rem;
-        margin-bottom: 1rem;
+        width: calc(100% - 1.6rem);
+        padding: 0.8rem;
+        margin-bottom: 0.8rem;
         display: flex;
         flex-direction: column;
 
         border-radius: 1rem;
         background-color: rgba(0, 0, 0, 0.2);
+
+        &.empty {
+          font-size: 0.8rem;
+          text-align: center;
+        }
 
         .item-content {
           width: 100%;
