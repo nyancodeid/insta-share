@@ -16,7 +16,7 @@
             </div>
             <div class="item-detail">
               <span class="item-detail--title" :title="item.file.name">{{ item.file.name }}</span>
-              <span class="item-detail--subtitle">{{ fileSize(item.file.size) }} - {{ item.file.type }}</span>
+              <span class="item-detail--subtitle">{{ fileSize(item.file.size) }} • {{ item.file.type }}</span>
             </div>
             <div class="item-action">
               <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>

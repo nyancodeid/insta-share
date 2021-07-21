@@ -127,17 +127,30 @@ body,
             }
           }
           &#panel-upload {
-            height: 280px;
+            height: 250px;
+
+            .panel-upload--dropzone {
+              align-items: flex-start;
+
+              .dropzone-label {
+                margin-top: 1rem;
+              }
+            }
           }
           &#panel-result {
             .panel-result--content .content-file--items {
               margin-right: 0;
 
-             .content-file--item .item-detail {
-                width: 50%;
+              .content-file--item {
+                .item-icon {
+                  display: none;
+                }
+                .item-detail {
+                  width: 50%;
 
-                .item-detail--title {
-                  width: 95%;
+                  .item-detail--title {
+                    width: 95%;
+                  }
                 }
               }
             }
