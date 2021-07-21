@@ -56,9 +56,7 @@ export const isVideo = (type) => {
  * @returns {String}
  */
 export const generateLink = ({ cid, file }) => {
-  if (isVideo(file.type)) {
-    return `https://${cid}.ipfs.dweb.link`;
-  }
+  if (isVideo(file.type)) return `https://${cid}.ipfs.dweb.link`;
 
   return `https://cloudflare-ipfs.com/ipfs/${cid}`
 }

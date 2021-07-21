@@ -19,12 +19,14 @@
               <span class="item-detail--subtitle">{{ fileSize(item.file.size) }} • {{ item.file.type }}</span>
             </div>
             <div class="item-action">
-              <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>
+              <i class="icon" :class="`icon-shorten--${(!!item.shorten) ? 'active' : 'default'}`" :title="shortenLinkTitle(item)" @click="shortenLink(item)"></i>
               <i class="icon icon-open-link" title="Open Link" @click="openFileLink(item)"></i>
             </div>
           </div>
           <div class="item-cid">
             <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="`ipfs://${item.cid}`" />
+
+            <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>
           </div>
         </div>
       </div>
@@ -51,6 +53,52 @@ export default {
 
     const search = ref("");
 
+    const shortenLinkTitle = (item) => {
+      return (!!item.shorten) ? 
+        `Open Shorten Link` :
+        `Generate Shorten Link`;
+    }
+    const shortenLink = async (item) => {
+      const url = generateLink(item);
+
+      if (!!item.shorten) {
+        return window.open(item.shorten, "_blank");
+      }
+
+      const loadingIndicator = notyf.open({
+        type: "loading",
+        message: "Please wait, we generate shorten link for you."
+      });
+
+      try {
+        const response = await fetch(`https://shorter-url-id.glitch.me/shorten`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({
+            url
+          })
+        });
+
+        if (!response.ok) {
+          notyf.error(`Ops! error while generate shorten link.`);
+        } else {
+          const data = await response.json();
+
+          if (data.success && data.data?.short) {
+            const shortenLink = `https://s.id/${data.data.short}`;
+            store.updateShortenLink(item.cid, shortenLink);
+
+            notyf.success(`Shorten Link has successfully generated.`);
+          }
+        }
+      } catch (error) {
+        notyf.error(`Ops! error while generate shorten link.`);
+      } finally {
+        notyf.dismiss(loadingIndicator);
+      }
+    }
     const copyFileLink = (item) => {
       const url = generateLink(item);
       copyToClipboard(url);
@@ -79,6 +127,8 @@ export default {
       search,
       files,
       fileSize,
+      shortenLink,
+      shortenLinkTitle,
       copyFileLink,
       openFileLink,
       onSearchChanged
@@ -89,7 +139,7 @@ export default {
 
 <style lang="scss">
 section#panel-result {
-  background-color: rgba(255, 255, 255, .2);
+  background-color: rgba(255, 255, 255, 0.2);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 
@@ -103,19 +153,19 @@ section#panel-result {
 
       overflow-y: scroll;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, .4) rgba(255, 255, 255, .2);
+      scrollbar-color: rgba(0, 0, 0, .4) rgba(255, 255, 255, 0.2);
 
       height: calc(100% - 2.95rem);
 
       &::-webkit-scrollbar {
-        width: .3rem;
+        width: 0.3rem;
       }
       &::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, .2);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 1rem;
       }
       &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, .6);
+        background-color: rgba(0, 0, 0, 0.6);
         border-radius: 1rem;
       }
 
@@ -142,7 +192,7 @@ section#panel-result {
           align-items: center;
 
           .item-icon {
-            padding: .5rem .5rem .5rem 0;
+            padding: 0.5rem 0.5rem 0.5rem 0;
           }
           .item-detail {
             display: flex;
@@ -150,26 +200,26 @@ section#panel-result {
             flex: 1;
 
             .item-detail--title {
-              font-size: .7rem;
+              font-size: 0.7rem;
               width: 220px;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
 
-              margin-bottom: .4rem;
+              margin-bottom: 0.4rem;
             }
             .item-detail--subtitle {
-              font-size: .7rem;
+              font-size: 0.7rem;
             }
           }
           .item-action {
             display: flex;
             align-items: center;
-            padding: .5rem 0 .5rem .5rem;
+            padding: 0.5rem 0 0.5rem 0.5rem;
 
             .icon {
               &:not(:last-child) {
-                margin-right: .3rem;
+                margin-right: 0.5rem;
               }
 
               &.icon-open-link {
@@ -180,18 +230,23 @@ section#panel-result {
           }
         }
         .item-cid {
-          margin-top: .7rem;
+          display: flex;
+          align-items: center;
+          margin-top: 0.7rem;
           width: 100%;
 
           .input-cid {
-            width: calc(100% - 16px);
-            background-color: rgba(0, 0, 0, .3);
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.3);
             outline: none;
             border: none;
             color: #ffffff;
-            padding: 8px 8px;
-            border-radius: .5rem;
-            font-size: .7rem;
+            padding: 8px;
+            border-radius: 0.5rem;
+            font-size: 0.7rem;
+          }
+          .icon.icon-copy {
+            margin-left: 0.5rem;
           }
         }
       }
