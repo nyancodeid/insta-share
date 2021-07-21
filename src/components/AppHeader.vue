@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div class="header-title">
-      <h1>InstaShare<img class="icon" src="/favicon.svg" alt="⚡"/></h1>
+      <h1>InstaShare<span class="emoji">⚡</span></h1>
       <span>Instant File Sharing powered by IPFS Protocol</span>
     </div>
     <div class="header-menu">

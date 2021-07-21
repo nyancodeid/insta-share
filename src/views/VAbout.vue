@@ -2,7 +2,7 @@
   <section id="content">
     <div class="main">
       <section id="about">
-        <h1>InstaShare<img class="icon" src="/favicon.svg" alt="⚡"/></h1>
+        <h1>InstaShare<span class="emoji">⚡</span></h1>
         <p>a Instant File Sharing powered by IPFS Protocol. Build with <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a> and
           <a href="https://vitejs.dev/" target="_blank">ViteJS</a>.</p>
         <p>InstaShare (Instant Share) is a simple web-based application that simply upload your files to IPFS Network using NFT Storage API. We created free account with Public API Key so you can use it instantly without creating API Key first.</p>
