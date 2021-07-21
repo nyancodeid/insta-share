@@ -36,10 +36,8 @@ export default {
       font-size: 1.7rem;
       margin: 0 0 8px 0;
 
-      img {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
+      span.emoji {
+        font-size: 1.6rem;
       }
     }
     span {
