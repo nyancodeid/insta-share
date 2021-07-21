@@ -139,7 +139,7 @@ export default {
 
 <style lang="scss">
 section#panel-result {
-  background-color: rgba(255, 255, 255, .2);
+  background-color: rgba(255, 255, 255, 0.2);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 
@@ -153,19 +153,19 @@ section#panel-result {
 
       overflow-y: scroll;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, .4) rgba(255, 255, 255, .2);
+      scrollbar-color: rgba(0, 0, 0, .4) rgba(255, 255, 255, 0.2);
 
       height: calc(100% - 2.95rem);
 
       &::-webkit-scrollbar {
-        width: .3rem;
+        width: 0.3rem;
       }
       &::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, .2);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 1rem;
       }
       &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, .6);
+        background-color: rgba(0, 0, 0, 0.6);
         border-radius: 1rem;
       }
 
@@ -192,7 +192,7 @@ section#panel-result {
           align-items: center;
 
           .item-icon {
-            padding: .5rem .5rem .5rem 0;
+            padding: 0.5rem 0.5rem 0.5rem 0;
           }
           .item-detail {
             display: flex;
@@ -200,26 +200,26 @@ section#panel-result {
             flex: 1;
 
             .item-detail--title {
-              font-size: .7rem;
+              font-size: 0.7rem;
               width: 220px;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
 
-              margin-bottom: .4rem;
+              margin-bottom: 0.4rem;
             }
             .item-detail--subtitle {
-              font-size: .7rem;
+              font-size: 0.7rem;
             }
           }
           .item-action {
             display: flex;
             align-items: center;
-            padding: .5rem 0 .5rem .5rem;
+            padding: 0.5rem 0 0.5rem 0.5rem;
 
             .icon {
               &:not(:last-child) {
-                margin-right: .3rem;
+                margin-right: 0.5rem;
               }
 
               &.icon-open-link {
@@ -246,7 +246,7 @@ section#panel-result {
             font-size: 0.7rem;
           }
           .icon.icon-copy {
-            margin-left: 0.8rem;
+            margin-left: 0.5rem;
           }
         }
       }
