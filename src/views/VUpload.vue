@@ -26,7 +26,19 @@ export default {
       position: {
         x: 'center',
         y: 'bottom'
-      }
+      },
+      types: [
+        {
+          type: 'loading',
+          background: 'orange',
+          duration: 0,
+          dismissible: true,
+          icon: {
+            className: 'icon icon-loading',
+            tagName: 'i'
+          }
+        },
+      ]
     })
 
     provide("notyf", NotfyProvider);
