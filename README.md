@@ -1,5 +1,5 @@
 # InstaShare
-Instant File Sharing with IPFS Protocol. Build with Vue 3 and ViteJS.
+Instant File Sharing powered by IPFS Protocol. Build with Vue 3 and ViteJS.
 
 [![Repository](https://img.shields.io/badge/github-insta--share-green?logo=github&style=flat)](https://github.com/nyancodeid/insta-share)
 ![License MIT](https://img.shields.io/github/license/nyancodeid/insta-share)

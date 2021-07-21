@@ -1,6 +1,6 @@
 {
-  "name": "nft-share",
-  "version": "0.0.1",
+  "name": "insta-share",
+  "version": "1.2.0",
   "description": "NFT Share File",
   "scripts": {
     "dev": "vite",
