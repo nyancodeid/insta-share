@@ -26,7 +26,23 @@ export const useStore = defineStore({
       this.results = this.results.filter(({ cid }) => !!cid);
 
       db.data.results = [ ...this.results ];
+      db.write();
+    },
+    /**
+     * Update Shorten Link for File
+     * @param {String} cid 
+     * @param {String} link 
+     */
+    updateShortenLink(cid, link) {
+      this.results = this.results.map(result => {
+        if (result.cid === cid) {
+          return { ...result, shorten: link }
+        }
 
+        return result;
+      });
+
+      db.data.results = [ ...this.results ];
       db.write();
     }
   }

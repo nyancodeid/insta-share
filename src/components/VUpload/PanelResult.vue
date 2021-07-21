@@ -19,12 +19,14 @@
               <span class="item-detail--subtitle">{{ fileSize(item.file.size) }} • {{ item.file.type }}</span>
             </div>
             <div class="item-action">
-              <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>
+              <i class="icon" :class="`icon-shorten--${(!!item.shorten) ? 'active' : 'default'}`" :title="shortenLinkTitle(item)" @click="shortenLink(item)"></i>
               <i class="icon icon-open-link" title="Open Link" @click="openFileLink(item)"></i>
             </div>
           </div>
           <div class="item-cid">
             <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="`ipfs://${item.cid}`" />
+
+            <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>
           </div>
         </div>
       </div>
@@ -51,6 +53,52 @@ export default {
 
     const search = ref("");
 
+    const shortenLinkTitle = (item) => {
+      return (!!item.shorten) ? 
+        `Open Shorten Link` :
+        `Generate Shorten Link`;
+    }
+    const shortenLink = async (item) => {
+      const url = generateLink(item);
+
+      if (!!item.shorten) {
+        return window.open(item.shorten, "_blank");
+      }
+
+      const loadingIndicator = notyf.open({
+        type: "loading",
+        message: "Please wait, we generate shorten link for you."
+      });
+
+      try {
+        const response = await fetch(`https://shorter-url-id.glitch.me/shorten`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({
+            url
+          })
+        });
+
+        if (!response.ok) {
+          notyf.error(`Ops! error while generate shorten link.`);
+        } else {
+          const data = await response.json();
+
+          if (data.success && data.data?.short) {
+            const shortenLink = `https://s.id/${data.data.short}`;
+            store.updateShortenLink(item.cid, shortenLink);
+
+            notyf.success(`Shorten Link has successfully generated.`);
+          }
+        }
+      } catch (error) {
+        notyf.error(`Ops! error while generate shorten link.`);
+      } finally {
+        notyf.dismiss(loadingIndicator);
+      }
+    }
     const copyFileLink = (item) => {
       const url = generateLink(item);
       copyToClipboard(url);
@@ -79,6 +127,8 @@ export default {
       search,
       files,
       fileSize,
+      shortenLink,
+      shortenLinkTitle,
       copyFileLink,
       openFileLink,
       onSearchChanged
@@ -180,18 +230,23 @@ section#panel-result {
           }
         }
         .item-cid {
-          margin-top: .7rem;
+          display: flex;
+          align-items: center;
+          margin-top: 0.7rem;
           width: 100%;
 
           .input-cid {
-            width: calc(100% - 16px);
-            background-color: rgba(0, 0, 0, .3);
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.3);
             outline: none;
             border: none;
             color: #ffffff;
-            padding: 8px 8px;
-            border-radius: .5rem;
-            font-size: .7rem;
+            padding: 8px;
+            border-radius: 0.5rem;
+            font-size: 0.7rem;
+          }
+          .icon.icon-copy {
+            margin-left: 0.8rem;
           }
         }
       }
