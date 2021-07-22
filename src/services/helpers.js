@@ -51,12 +51,19 @@ export const isVideo = (type) => {
 
 /**
  * Generate IPFS Gateway link
- * @param {String} cid
- * @param file
+ * 
+ * @typedef {Object} IFile
+ * @property {String} cid
+ * @property {Object} file 
+ * @property {String} file.type
+ * 
+ * @param {IFile} item
+ * @param {Boolean} isShorten
  * @returns {String}
  */
-export const generateLink = ({ cid, file }) => {
-  if (isVideo(file.type)) return `https://${cid}.ipfs.dweb.link`;
+export const generateLink = (item, isShorten = false) => {
+  if (isShorten && !!item.shorten) return item.shorten;
+  if (isVideo(item.file.type)) return `https://${item.cid}.ipfs.dweb.link`;
 
-  return `https://cloudflare-ipfs.com/ipfs/${cid}`
+  return `https://cloudflare-ipfs.com/ipfs/${item.cid}`
 }

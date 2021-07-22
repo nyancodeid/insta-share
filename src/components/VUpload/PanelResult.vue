@@ -19,12 +19,16 @@
               <span class="item-detail--subtitle">{{ fileSize(item.file.size) }} • {{ item.file.type }}</span>
             </div>
             <div class="item-action">
-              <i class="icon" :class="`icon-shorten--${(!!item.shorten) ? 'active' : 'default'}`" :title="shortenLinkTitle(item)" @click="shortenLink(item)"></i>
-              <i class="icon icon-open-link" title="Open Link" @click="openFileLink(item)"></i>
+              <a v-if="!!item.shorten" class="icon icon-shorten--active" title="Open Shorten Link" target="_blank" :href="generateLink(item, true)" rel="noopener"></a>
+              <i v-else class="icon icon-shorten--default" title="Generate Shorten Link" @click="shortenLink(item)"></i>
+
+              <a class="icon icon-open-link" title="Open Link" target="_blank" :href="generateLink(item)" rel="noopener"></a>
             </div>
           </div>
           <div class="item-cid">
-            <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="`ipfs://${item.cid}`" />
+            <label>
+              <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="`ipfs://${item.cid}`" />
+            </label>
 
             <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>
           </div>
@@ -53,17 +57,8 @@ export default {
 
     const search = ref("");
 
-    const shortenLinkTitle = (item) => {
-      return (!!item.shorten) ? 
-        `Open Shorten Link` :
-        `Generate Shorten Link`;
-    }
     const shortenLink = async (item) => {
       const url = generateLink(item);
-
-      if (!!item.shorten) {
-        return window.open(item.shorten, "_blank");
-      }
 
       const loadingIndicator = notyf.open({
         type: "loading",
@@ -105,10 +100,6 @@ export default {
 
       notyf.success("Copied to clipboard!");
     }
-    const openFileLink = (item) => {
-      const url = generateLink(item);
-      window.open(url, "_blank");
-    }
     const onSearchChanged = ($event) => {
       search.value = $event.target.value;
     }
@@ -128,9 +119,8 @@ export default {
       files,
       fileSize,
       shortenLink,
-      shortenLinkTitle,
       copyFileLink,
-      openFileLink,
+      generateLink,
       onSearchChanged
     }
   }
@@ -235,15 +225,20 @@ section#panel-result {
           margin-top: 0.7rem;
           width: 100%;
 
-          .input-cid {
+          label {
+            display: flex;
             flex: 1;
-            background-color: rgba(0, 0, 0, 0.3);
-            outline: none;
-            border: none;
-            color: #ffffff;
-            padding: 8px;
-            border-radius: 0.5rem;
-            font-size: 0.7rem;
+
+            .input-cid {
+              flex: 1;
+              background-color: rgba(0, 0, 0, 0.3);
+              outline: none;
+              border: none;
+              color: #ffffff;
+              padding: 8px;
+              border-radius: 0.5rem;
+              font-size: 0.7rem;
+            }
           }
           .icon.icon-copy {
             margin-left: 0.5rem;
