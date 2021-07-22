@@ -42,7 +42,7 @@
 import { ref, computed, inject } from "vue";
 
 import { useStore } from "@src/store";
-import { fileSize, copyToClipboard, generateLink } from "@src/services/helpers";
+import { fileSize, copyToClipboard, generateLink, generateShortLink } from "@src/services/helpers";
 
 import SearchResult from "@src/components/VUpload/SearchResult.vue";
 
@@ -65,33 +65,17 @@ export default {
         message: "Please wait, we generate shorten link for you."
       });
 
-      try {
-        const response = await fetch(`https://shorter-url-id.glitch.me/shorten`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify({
-            url
-          })
-        });
+      const [ error, data ] = await generateShortLink(url);
 
-        if (!response.ok) {
-          notyf.error(`Ops! error while generate shorten link.`);
-        } else {
-          const data = await response.json();
+      notyf.dismiss(loadingIndicator);
 
-          if (data.success && data.data?.short) {
-            const shortenLink = `https://s.id/${data.data.short}`;
-            store.updateShortenLink(item.cid, shortenLink);
+      if (error) {
+        notyf.error(error.message);
+      } else {
+        const shortenLink = `https://s.id/${data.short}`;
+        store.updateShortenLink(item.cid, shortenLink);
 
-            notyf.success(`Shorten Link has successfully generated.`);
-          }
-        }
-      } catch (error) {
-        notyf.error(`Ops! error while generate shorten link.`);
-      } finally {
-        notyf.dismiss(loadingIndicator);
+        notyf.success(`Shorten Link has successfully generated.`);
       }
     }
     const copyFileLink = (item) => {
