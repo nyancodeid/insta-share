@@ -67,3 +67,35 @@ export const generateLink = (item, isShorten = false) => {
 
   return `https://cloudflare-ipfs.com/ipfs/${item.cid}`
 }
+
+/**
+ * Generate Short Link via s.id services
+ * @param {String} url 
+ * @returns {Promise<*[]>}
+ */
+export const generateShortLink = async (url) => {
+  try {
+    const response = await fetch(`https://cors.bridged.cc/https://home.s.id/api/public/link/shorten`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "x-csrf-token": "JfN0LkiBFPHfiBAVnHE61v5C3ti7hMB2uUb08VuI",
+        "x-requested-with": "XMLHttpRequest",
+        "x-xsrf-token": "JfN0LkiBFPHfiBAVnHE61v5C3ti7hMB2uUb08VuI",
+      },
+      body: `url=${encodeURIComponent(url)}`
+    });
+
+    if (!response.ok) {
+      throw new Error(`SOMETHING_WRONG`);
+    }
+
+    const data = await response.json();
+
+    if (data && data.short) {
+      return [ null, data ];
+    }
+  } catch (error) {
+    return [ new Error(`Ops! error while generate shorten link.`), null ];
+  }
+}
