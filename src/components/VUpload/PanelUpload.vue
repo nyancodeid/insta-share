@@ -2,7 +2,7 @@
   <section id="panel-upload">
     <div class="content panel-upload--content">
       <div class="panel-upload--dropzone" :class="{ active: isDragged }" @dragenter="onDragEnter" @dragleave="onDragLeave" @drop.prevent="onDropHandler" @dragover.prevent>
-        <input type="file" multiple ref="file" @change="onFileChangedHandler" />
+        <input type="file" multiple ref="fileRef" @change="onFileChangedHandler" />
 
         <div class="dropzone-label" @click="openSelectFile">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z"/></svg>
@@ -33,56 +33,62 @@ export default {
   name: "PanelUpload",
   setup() {
     const notyf = inject("notyf");
-    const file = ref(null);
+    const fileRef = ref(null);
     const isDragged = ref(false);
     const finished = ref(0);
+    const isUploading = ref(false);
 
     const store = useStore();
 
     const onDropHandler = ($event) => {
+      if (isUploading.value) return false;
+
       isDragged.value = false;
 
-      file.value.files = $event.dataTransfer.files;
+      fileRef.value.files = $event.dataTransfer.files;
 
       onFileChangedHandler();
     }
     const openSelectFile = () => {
-      file.value.click();
+      if (isUploading.value) return false;
+
+      fileRef.value.click();
     }
     const onDragEnter = () => {
       isDragged.value = true;
     }
-    const onDragLeave = ($event) => {
+    const onDragLeave = () => {
       isDragged.value = false;
     }
 
-    const uploadFileHandler = (file) => {
-      return uploadBlob(file).then(result => {
-        finished.value++;
+    const uploadFileHandler = async (file) => {
+      const result = await uploadBlob(file);
+      
+      finished.value++;
+      
+      const [ isError, _ ] = result;
+      
+      if (isError) {
+        notyf.error(isError.toString());
+      }
 
-        const [ isError, _ ] = result;
-
-        if (isError) {
-          notyf.error(isError.toString());
-        }
-
-        return result;
-      });
+      return result;
     }
     const onFileChangedHandler = async () => {
-      store.addFiles(...file.value.files);
+      isUploading.value = true;
+
+      store.addFiles(...fileRef.value.files);
 
       const files = store.files.map(file => uploadFileHandler(file));
 
       try {
         let results = await Promise.all(files);
+        const successfully = results.filter(([error, file]) => !error);
 
-        store.addResults(...results.map(([ error, data ]) => data));
+        store.addResults(...successfully.map(([ error, file ]) => file));
         store.resetFiles();
 
-        file.value.value = null;
-
-        const successfully = results.filter(([error, file]) => !error);
+        fileRef.value.value = null;
 
         if (successfully.length > 0) {
           notyf.success(`${successfully.length} files successfully processed.`);
@@ -91,6 +97,7 @@ export default {
         notyf.error(`Opss!, something error while processing your files.`);
       } finally {
         finished.value = 0;
+        isUploading.value = true;
       }
     }
 
@@ -108,7 +115,7 @@ export default {
 
     return {
       finished,
-      file,
+      fileRef,
       fileCount,
       result,
       isDragged,
