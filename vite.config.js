@@ -1,7 +1,8 @@
 import { defineConfig } from "vite"
 import { VitePWA } from "vite-plugin-pwa";
 import { resolve } from "path";
-import vue from "@vitejs/plugin-vue"
+import vue from "@vitejs/plugin-vue";
+import ViteFonts from "vite-plugin-fonts";
 
 export default defineConfig({
   resolve: {
@@ -42,5 +43,10 @@ export default defineConfig({
         ],
       },
     }),
+    ViteFonts({
+      google: {
+        families: ['IBM+Plex+Mono']
+      },
+    })
   ]
 })
