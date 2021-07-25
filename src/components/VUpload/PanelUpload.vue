@@ -97,7 +97,7 @@ export default {
         notyf.error(`Opss!, something error while processing your files.`);
       } finally {
         finished.value = 0;
-        isUploading.value = true;
+        isUploading.value = false;
       }
     }
 
