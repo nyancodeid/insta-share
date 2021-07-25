@@ -99,3 +99,11 @@ export const generateShortLink = async (url) => {
     return [ new Error(`Ops! error while generate shorten link.`), null ];
   }
 }
+
+/**
+ * Check is website running on PWA mode.
+ * @returns {Boolean}
+ */
+ export const isRunningOnPWA = () => {
+  return window.matchMedia("(display-mode: standalone)").matches;
+};
