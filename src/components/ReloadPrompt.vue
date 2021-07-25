@@ -27,7 +27,8 @@ export default {
     return {
       offlineReady,
       needRefresh,
-      close
+      close,
+      updateServiceWorker
     }
   }
 };
