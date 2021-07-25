@@ -2,7 +2,7 @@
     <img src="https://cloudflare-ipfs.com/ipfs/bafkreiagxtv2bwwbfvnqa4vuwyxwkko3ibgvwuowncvcy6yrg7nh57bzfm" width="64px" />
 </p>
 <h1 align="center">InstaShare</h1>
-<p align="center">Instant File Sharing powered by IPFS Protocol. Build with Vue 3 and ViteJS.</p>
+<p align="center">Instant File Sharing Apps powered by IPFS Networks. Build with Vue 3 and ViteJS.</p>
 
 <div align="center">
 
