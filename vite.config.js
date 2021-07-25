@@ -14,7 +14,7 @@ export default defineConfig({
     VitePWA({
       manifest: {
         name: "InstaShare - Instant File Sharing",
-        shortName: "InstaShare",
+        short_name: "InstaShare",
         description : "Instant File Sharing powered by IPFS Protocol",
         theme_color: "#212121",
         registerType: "autoUpdate",
