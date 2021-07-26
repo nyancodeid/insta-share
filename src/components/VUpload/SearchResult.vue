@@ -1,6 +1,6 @@
 <template>
   <div class="search-wrapper">
-    <label for="search" class="icon icon-search"></label>
+    <label for="search" class="icon icon-search">&#8203;</label>
     <input type="text" id="search" class="search-input" :value="search" @input="$emit('onChanged', $event)" />
 
     <div class="search-count--label" :class="{ show: (search !== '' && count > 0) }">{{ count }} founds</div>
