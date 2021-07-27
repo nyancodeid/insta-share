@@ -11,6 +11,7 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 ![Version](https://img.shields.io/badge/version-v1.3.0-brightgreen)
 [![Issues](https://img.shields.io/github/issues/nyancodeid/insta-share)](https://github.com/nyancodeid/insta-share/issues)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnyancodeid%2Finsta-share.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnyancodeid%2Finsta-share?ref=badge_shield)
 
 </div>
 
@@ -43,3 +44,6 @@ This image also hosted on IPFS Network using this web-app.
     <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreic5xizwysdytvruycz2xcldf3z2sc4oxx56hdpdwajvfuiwlktygy" style="width: 80%" />
     <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreidmwvic3klkj7rom6frfcvift2u74jtggiz2z3mnvymduroljduci" style="width: 80%" />
 </p>
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnyancodeid%2Finsta-share.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnyancodeid%2Finsta-share?ref=badge_large)
