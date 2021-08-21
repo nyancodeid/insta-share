@@ -12,17 +12,23 @@
         <div class="content-file--item" v-for="(item, index) in files" :key="index">
           <div class="item-content">
             <div class="item-icon">
-              <i class="icon no-pointer icon-file"></i>
+              <IconFile class="icon-color" />
             </div>
             <div class="item-detail">
               <span class="item-detail--title" :title="item.file.name">{{ item.file.name }}</span>
               <span class="item-detail--subtitle">{{ fileSize(item.file.size) }} • {{ item.file.type }}</span>
             </div>
             <div class="item-action">
-              <a v-if="!!item.shorten" class="icon icon-shorten--active" title="Open Shorten Link" target="_blank" :href="generateLink(item, true)" rel="noopener"></a>
-              <i v-else class="icon icon-shorten--default" title="Generate Shorten Link" @click="shortenLink(item)"></i>
+              <a v-if="!!item.shorten" title="Open Shorten Link" target="_blank" :href="generateLink(item, true)" rel="noopener">
+                <IconLinkBoxActive class="icon-color" />
+              </a>
+              <a v-else title="Generate Shorten Link" @click="shortenLink(item)">
+                <IconLinkBox class="icon-color" />
+              </a>
 
-              <a class="icon icon-open-link" title="Open Link" target="_blank" :href="generateLink(item)" rel="noopener"></a>
+              <a title="Open Link" target="_blank" :href="generateLink(item)" rel="noopener">
+                <IconOpen class="icon-color" />
+              </a>
             </div>
           </div>
           <div class="item-cid">
@@ -30,7 +36,9 @@
               <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="`ipfs://${item.cid}`" />
             </label>
 
-            <i class="icon icon-copy" title="Copy to clipboard" @click="copyFileLink(item)"></i>
+            <a title="Copy to clipboard" @click="copyFileLink(item)">
+              <IconPaste class="icon-color" />
+            </a>
           </div>
         </div>
       </div>
@@ -40,6 +48,11 @@
 
 <script>
 import { ref, computed, inject } from "vue";
+import IconFile from "virtual:vite-icons/ri/file-list-3-line";
+import IconOpen from "virtual:vite-icons/ri/external-link-fill";
+import IconPaste from "virtual:vite-icons/ri/clipboard-line";
+import IconLinkBoxActive from "virtual:vite-icons/ri/link-unlink-m";
+import IconLinkBox from "virtual:vite-icons/ri/link-m";
 
 import { useStore } from "@src/store";
 import { fileSize, copyToClipboard, generateLink, generateShortLink } from "@src/services/helpers";
@@ -49,7 +62,12 @@ import SearchResult from "@src/components/VUpload/SearchResult.vue";
 export default {
   name: "PanelResult",
   components: {
-    SearchResult
+    SearchResult,
+    IconFile,
+    IconOpen,
+    IconPaste,
+    IconLinkBox,
+    IconLinkBoxActive
   },
   setup() {
     const notyf = inject("notyf");
@@ -113,9 +131,10 @@ export default {
 
 <style lang="scss">
 section#panel-result {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #ffffff;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
+  border-left: 1px solid rgba(0, 0, 0, .05);
 
   .panel-result--content {
     padding: 0.8rem;
@@ -127,7 +146,7 @@ section#panel-result {
 
       overflow-y: scroll;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, .4) rgba(255, 255, 255, 0.2);
+      scrollbar-color: rgba(0, 0, 0, .4) rgba(36, 18, 18, 0.2);
 
       height: calc(100% - 2.95rem);
 
@@ -151,12 +170,16 @@ section#panel-result {
         flex-direction: column;
 
         border-radius: 1rem;
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, .05);
 
         &.empty {
           font-size: 0.7rem;
           text-align: center;
           border-radius: 0.8rem;
+        }
+
+        a svg {
+          cursor: pointer;
         }
 
         .item-content {
@@ -191,18 +214,14 @@ section#panel-result {
             align-items: center;
             padding: 0.5rem 0 0.5rem 0.5rem;
 
-            .icon {
+            a {
               &:not(:last-child) {
                 margin-right: 0.5rem;
-              }
-
-              &.icon-open-link {
-                width: 20px;
-                height: 20px;
               }
             }
           }
         }
+
         .item-cid {
           display: flex;
           align-items: center;
@@ -215,19 +234,36 @@ section#panel-result {
 
             .input-cid {
               flex: 1;
-              background-color: rgba(0, 0, 0, 0.3);
+              background-color: rgba(0, 0, 0, 0.1);
               outline: none;
               border: none;
-              color: #ffffff;
+              color: var(--contrast-color);
               padding: 8px;
               border-radius: 0.5rem;
               font-size: 0.7rem;
             }
           }
-          .icon.icon-copy {
+          a {
             margin-left: 0.5rem;
           }
         }
+      }
+    }
+  }
+}
+
+body.dark-theme {
+  section#panel-result {
+    background-color: var(--gradient-900);
+
+    .content-file--items .content-file--item {
+      background-color: rgba(255, 255, 255, .05);
+
+      .item-detail--subtitle {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .item-cid .input-cid {
+        color: rgba(255, 255, 255, 0.8);
       }
     }
   }

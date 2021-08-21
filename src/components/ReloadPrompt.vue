@@ -1,12 +1,12 @@
 <template>
   <div v-if="offlineReady || needRefresh" class="pwa-toast" role="alert">
     <div class="pwa-toast--offline" v-if="offlineReady">
-      <i class="icon icon-shorten--default"></i>
+      <IconOffline />
       <span>Offline Mode Ready</span>
     </div>
 
     <div class="pwa-toast--update" v-if="needRefresh">
-      <i class="icon icon-loading"></i>
+      <IconLoading />
       <span>Working Auto Update</span>
     </div>
   </div>
@@ -14,12 +14,19 @@
 
 <script>
 import { useRegisterSW } from "virtual:pwa-register/vue";
+import IconLoading from "virtual:vite-icons/mdi/timer-sand";
+import IconOffline from "virtual:vite-icons/mdi/flash-outline";
+
 import { watch } from '@vue/runtime-core';
 
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
 export default {
   name: "ReloadPrompt",
+  components: {
+    IconLoading,
+    IconOffline,
+  },
   setup() {
     const watcherStop = watch([ offlineReady, needRefresh ], (now, prev) => {
       const [ offlineNow, refreshNow ] = now;
@@ -50,15 +57,15 @@ export default {
 <style lang="scss">
 .pwa-toast {
   position: fixed;
-  right: 0.8rem;
-  bottom: 0;
+  right: 2em;
+  bottom: 1em;
   border-radius: 4px;
   z-index: 1;
 
   .pwa-toast--offline,
   .pwa-toast--update {
-    background-color: rgb(66, 66, 66);
-    color: rgb(245, 245, 245);
+    background-color: var(--gradient-800);
+    color: var(--contrast-color);
 
     display: flex;
     align-items: center;
@@ -68,7 +75,7 @@ export default {
     
     font-size: 0.8rem;
 
-    i.icon {
+    svg {
       display: inline-flex;
       margin-right: 0.4rem;
     }

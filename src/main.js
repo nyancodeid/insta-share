@@ -11,8 +11,14 @@ import "notyf/notyf.min.css";
 const app = createApp(App);
 const pinia = createPinia();
 
-app.use(pinia).use(router);
+app
+  .use(pinia)
+  .use(router);
 
 if (isRunningOnPWA) window.resizeTo(890, 640);
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.body.classList.add("dark-theme");
+}
 
 app.mount('#app');

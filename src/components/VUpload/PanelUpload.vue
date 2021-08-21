@@ -5,9 +5,11 @@
         <input type="file" multiple ref="fileRef" @change="onFileChangedHandler" />
 
         <div class="dropzone-label" @click="openSelectFile">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z"/></svg>
-          <span>Drop files here or click to select files.</span>
+          <IconLoading v-if="(fileCount > 0)" class="icon-color" />
+          <IconUpload v-else class="icon-color" />
 
+          <span>Drop files here or click to select files.</span>
+          
           <div class="dropzone-is-loading" :class="{ active: (fileCount > 0) }">
             <div class="dropzone-loading--bar"></div>
           </div>
@@ -24,13 +26,20 @@
 </template>
 
 <script>
-import { computed, inject, reactive, ref } from "vue";
+import { computed, inject, ref } from "vue";
+import IconUpload from "virtual:vite-icons/mdi/upload";
+import IconLoading from "virtual:vite-icons/mdi/timer-sand";
+
 import { useStore } from "@src/store";
 import { uploadBlob } from "@src/services/nft.js"
 import { fileSize } from "@src/services/helpers";
 
 export default {
   name: "PanelUpload",
+  components: {
+    IconUpload,
+    IconLoading
+  },
   setup() {
     const notyf = inject("notyf");
     const fileRef = ref(null);
@@ -132,7 +141,7 @@ export default {
 
 <style lang="scss">
 section#panel-upload {
-  background-color: rgba(255, 255, 255, .1);
+  background-color: var(--gradient-100);
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
 
@@ -181,7 +190,7 @@ section#panel-upload {
       }
 
       span {
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
     }
     .dropzone-details {
@@ -192,7 +201,7 @@ section#panel-upload {
       left: 1rem;
 
       .dropzone-detail {
-        background-color: rgba(255, 255, 255, .1);
+        background-color: var(--gradient-300);
         border-radius: 1rem;
         padding: .4rem .8rem;
         font-size: .8rem;
@@ -207,7 +216,7 @@ section#panel-upload {
       height: 4px;
       display: block;
       width: 150px;
-      background-color: rgba(0, 0, 0, .25);
+      background-color: var(--gradient-300);
       border-radius: 2px;
       margin: 1rem 0 1rem 0;
       overflow: hidden;
@@ -217,7 +226,7 @@ section#panel-upload {
       }
 
       .dropzone-loading--bar {
-        background-color: var(--primary-color);
+        background-color: var(--gradient-800);
 
         &:before {
           content: '';
@@ -240,6 +249,23 @@ section#panel-upload {
           animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
           animation-delay: 1.15s;
         }
+      }
+    }
+  }
+}
+
+body.dark-theme {
+  section#panel-upload {
+    background-color: var(--gradient-800);
+
+    .dropzone-details .dropzone-detail {
+      background-color: var(--gradient-900);
+    }
+    .dropzone-is-loading {
+      background-color: var(--gradient-700);
+
+      .dropzone-loading--bar {
+        background-color: var(--icon-color);
       }
     }
   }
