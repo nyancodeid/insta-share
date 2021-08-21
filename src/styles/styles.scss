@@ -4,6 +4,8 @@
 }
 
 body {
+  background-color: #FFFFFF;
+
   --dark-color: rgb(254, 236, 181);
   --secondary-color: rgb(250, 145, 25);
   --contrast-color: black;
@@ -28,7 +30,7 @@ body {
   color: var(--contrast-color);
 
   &.dark-theme {
-    background: rgb(17, 24, 39);
+    background-color: rgb(17, 24, 39);
 
     --darken-color: rgb(49, 36, 200);
     --secondary-color: rgb(202, 202, 250);
