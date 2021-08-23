@@ -40,7 +40,7 @@ export default {
     const toggleTheme = () => {
       document.body.classList.toggle("dark-theme");
 
-      toggleAnimation();
+      requestAnimationFrame(toggleAnimation);
 
       isDark.value = !isDark.value;
     }
