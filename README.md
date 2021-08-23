@@ -9,7 +9,7 @@
 [![Repository](https://img.shields.io/badge/github-insta--share-green?logo=github&style=flat)](https://github.com/nyancodeid/insta-share)
 ![License MIT](https://img.shields.io/github/license/nyancodeid/insta-share)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
-![Version](https://img.shields.io/badge/version-v1.3.0-brightgreen)
+![Version](https://img.shields.io/badge/version-v1.4.0-brightgreen)
 [![Issues](https://img.shields.io/github/issues/nyancodeid/insta-share)](https://github.com/nyancodeid/insta-share/issues)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnyancodeid%2Finsta-share.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnyancodeid%2Finsta-share?ref=badge_shield)
 
@@ -23,10 +23,10 @@ InstaShare build with Latest Web Technology that makes hopefully can access this
 
 | Tools       | Version         | Desc                                                                                    | Website                                                                                    |
 | ----------- | --------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Vue         | `^3.0.5`        | Web Framework                                                                           | [https://v3.vuejs.org/](https://v3.vuejs.org/)                                             |
-| Vite        | `^2.3.7`        | Next Generation Frontend Tooling                                                        | [https://vitejs.dev/](https://vitejs.dev/)                                                 |
-| Pinia       | `^2.0.0-beta.3` | Intuitive, type safe and flexible Store for Vue                                         | [https://pinia.esm.dev/](https://pinia.esm.dev/)                                           |
-| Vue-Router  | `^4.0.8`        | The official router for Vue.js.                                                         | [https://router.vuejs.org/](https://router.vuejs.org/)                                     |
+| Vue         | `^3.2.4`        | Web Framework                                                                           | [https://v3.vuejs.org/](https://v3.vuejs.org/)                                             |
+| Vite        | `^2.5.0`        | Next Generation Frontend Tooling                                                        | [https://vitejs.dev/](https://vitejs.dev/)                                                 |
+| Pinia       | `^2.0.0-rc.6` | Intuitive, type safe and flexible Store for Vue                                         | [https://pinia.esm.dev/](https://pinia.esm.dev/)                                           |
+| Vue-Router  | `^4.0.10`        | The official router for Vue.js.                                                         | [https://router.vuejs.org/](https://router.vuejs.org/)                                     |
 
 ## Development
 ```bash
