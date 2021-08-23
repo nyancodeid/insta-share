@@ -41,8 +41,8 @@ $ npm run build
 This image also hosted on IPFS Network using this web-app.
 
 <p align="center">
-    <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreic5xizwysdytvruycz2xcldf3z2sc4oxx56hdpdwajvfuiwlktygy" style="width: 80%" />
-    <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreidmwvic3klkj7rom6frfcvift2u74jtggiz2z3mnvymduroljduci" style="width: 80%" />
+    <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreic7tt7j2upgds3kgs6wldu6ryzer3hrxs5sp2rur4f6zgqzr4ndsy" style="width: 80%" />
+    <img alt="InstaShare" src="https://cloudflare-ipfs.com/ipfs/bafkreifdzvh24hddxqxodt336vyt75tlxlmodbyisqvy2xreqfk3nruk6m" style="width: 80%" />
 </p>
 
 ## License
