@@ -31,7 +31,7 @@ import IconUpload from "virtual:vite-icons/mdi/upload";
 import IconLoading from "virtual:vite-icons/mdi/timer-sand";
 
 import { useStore } from "@src/store";
-import { uploadBlob } from "@src/services/nft.js"
+import { uploadBlob } from "@src/services/ipfs.js"
 import { fileSize } from "@src/services/helpers";
 
 export default {
@@ -70,16 +70,16 @@ export default {
       isDragged.value = false;
     }
 
+    /**
+     * @param {File} file
+     */
     const uploadFileHandler = async (file) => {
       const result = await uploadBlob(file);
       
       finished.value++;
       
-      const [ isError, _ ] = result;
-      
-      if (isError) {
-        notyf.error(isError.toString());
-      }
+      const { error } = result;
+      if (error && error instanceof Error) notyf.error(error.message);
 
       return result;
     }
@@ -92,9 +92,9 @@ export default {
 
       try {
         let results = await Promise.all(files);
-        const successfully = results.filter(([error, file]) => !error);
+        const successfully = results.filter(({ error }) => !error);
 
-        store.addResults(...successfully.map(([ error, file ]) => file));
+        store.addResults(...successfully.map(({ error, data: file }) => file));
         store.resetFiles();
 
         fileRef.value.value = null;
