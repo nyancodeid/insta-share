@@ -1,16 +1,17 @@
-import NFTStorage from "@src/services/NFTStorage";
-
-// NFTStorage Public Key
-const PUBLIC_KEY = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDNhZEFEQjk2MjVEZjcwMDEyRDMzNjFFN2MyNDA5ZmE4MTNjODVmOTMiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYyNjYxOTQ2MDM2MiwibmFtZSI6IlB1YmxpYyBLZXkifQ.VlGodOSVqWq1N7SO298-l31GHhWwOgWP4WIZCnZoiPk`;
+import IPFSNetwork from "@src/services/IPFSNetwork";
 
 /**
  * Upload Blob to NFT Storage
+ * 
+ * @typedef {Object} SafeAsync
+ * @property {Boolean|Error} error
+ * @property {FileDetail} data
+ * 
  * @param {File} file
- * @returns {Promise<(boolean|string)[]|*[]>}
+ * @returns {Promise<SafeAsync>}
  */
 export const uploadBlob = async (file) => {
-  const token = PUBLIC_KEY;
-  const client = new NFTStorage({ token });
+  const client = new IPFSNetwork();
 
   let detail = getCidDetail({ cid: null, file });
 
@@ -22,17 +23,27 @@ export const uploadBlob = async (file) => {
   try {
     const cid = await client.storeBlob(file);
     detail = getCidDetail({ cid, file });
-    return [ false, detail ];
+    return { error: false, data: detail };
   } catch (error) {
-    return [ error, detail ];
+    return { error, data: detail };
   }
 }
 
 /**
- *
+ * Get CID Detail with File
+ * 
+ * @typedef {Object} FileDetail
+ * @property {String} cid
+ * @property {Object} file
+ * @property {String} file.name
+ * @property {String} file.type
+ * @property {Number} file.size
+ * @property {Number} file.created_at
+ * 
  * @param {Object} params
  * @param {String} params.cid
  * @param {File} params.file
+ * @returns {FileDetail}
  */
 export const getCidDetail = ({ cid, file }) => {
   const base = {
@@ -42,7 +53,7 @@ export const getCidDetail = ({ cid, file }) => {
     created_at: Date.now()
   }
 
-  if (!cid) return { cid: false, file: base };
+  if (!cid) return { cid: null, file: base };
 
   return {
     cid,
