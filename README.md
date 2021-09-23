@@ -21,12 +21,12 @@ InstaShare (Instant Share) is a simple web-based application that simply upload 
 ## Tech
 InstaShare build with Latest Web Technology that makes hopefully can access this app even in offline mode (cache-first). And the other cool thing is PWA (Progressive Web App) makes this app installable on Android devices, allow us to use this app to run native-like on an Android.
 
-| Tools       | Version         | Desc                                                                                    | Website                                                                                    |
-| ----------- | --------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Vue         | `^3.2.4`        | Web Framework                                                                           | [https://v3.vuejs.org/](https://v3.vuejs.org/)                                             |
-| Vite        | `^2.5.0`        | Next Generation Frontend Tooling                                                        | [https://vitejs.dev/](https://vitejs.dev/)                                                 |
-| Pinia       | `^2.0.0-rc.6` | Intuitive, type safe and flexible Store for Vue                                         | [https://pinia.esm.dev/](https://pinia.esm.dev/)                                           |
-| Vue-Router  | `^4.0.10`        | The official router for Vue.js.                                                         | [https://router.vuejs.org/](https://router.vuejs.org/)                                     |
+| Tools                                                      | Version                                                           | Description                                                                                             |
+| ---------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [vue](https://v3.vuejs.org/)                               | ![Version](https://img.shields.io/badge/version-v3.2.4-blue)      | Web Framework                                                                                           |
+| [vite](https://vitejs.dev/)                                | ![Version](https://img.shields.io/badge/version-v2.5.0-blue)      | Next Generation Frontend Tooling                                                                        |
+| [pinia](https://pinia.esm.dev/)                            | ![Version](https://img.shields.io/badge/version-v2.0.0.rc.6-blue) | Intuitive, type safe and flexible Store for Vue                                                         |
+| [vue-router](https://router.vuejs.org/)                    | ![Version](https://img.shields.io/badge/version-v4.0.8-blue)      | The official router for Vue.                                                                            |
 
 ## Development
 ```bash
