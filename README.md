@@ -16,7 +16,7 @@
 </div>
 
 ## Description
-InstaShare (Instant Share) is a simple web-based application that simply upload your files into IPSF Network using NFT Storage.
+InstaShare (Instant Share) is a simple web-based application that simply upload your files into IPSF Network using Infura API. File uploads cannot be deleted, hacked, edited, never saved to any server (decentralized) + are only accessable by using a hash / cid (content identifier).
 
 ## Tech
 InstaShare build with Latest Web Technology that makes hopefully can access this app even in offline mode (cache-first). And the other cool thing is PWA (Progressive Web App) makes this app installable on Android devices, allow us to use this app to run native-like on an Android.
