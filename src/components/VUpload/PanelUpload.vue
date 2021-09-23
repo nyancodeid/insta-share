@@ -5,8 +5,8 @@
         <input type="file" multiple ref="fileRef" @change="onFileChangedHandler" />
 
         <div class="dropzone-label" @click="openSelectFile">
-          <IconLoading v-if="(fileCount > 0)" class="icon-color" />
-          <IconUpload v-else class="icon-color" />
+          <i-mdi-timer-sand v-if="(fileCount > 0)" class="icon-color" />
+          <i-mdi-upload v-else class="icon-color" />
 
           <span>Drop files here or click to select files.</span>
           
@@ -27,8 +27,6 @@
 
 <script>
 import { computed, inject, ref } from "vue";
-import IconUpload from "virtual:vite-icons/mdi/upload";
-import IconLoading from "virtual:vite-icons/mdi/timer-sand";
 
 import { useStore } from "@src/store";
 import { uploadBlob } from "@src/services/ipfs.js"
@@ -36,10 +34,6 @@ import { fileSize } from "@src/services/helpers";
 
 export default {
   name: "PanelUpload",
-  components: {
-    IconUpload,
-    IconLoading
-  },
   setup() {
     const notyf = inject("notyf");
     const fileRef = ref(null);

@@ -13,8 +13,8 @@
         <router-link :to="{ name: 'about' }" active-class="active" exact>About</router-link>
 
         <i :title="`Switch to ${isDark ? 'Light' : 'Dark'} Theme`">
-          <IconLight v-if="isDark" class="icon-color" @click="toggleTheme" />
-          <IconDark v-else class="icon-color" @click="toggleTheme" />
+          <i-mdi-brightness-7 v-if="isDark" class="icon-color" @click="toggleTheme" />
+          <i-mdi-brightness-4 v-else class="icon-color" @click="toggleTheme" />
         </i>
       </nav>
     </div>
@@ -24,15 +24,8 @@
 <script>
 import { ref } from "vue";
 
-import IconLight from "virtual:vite-icons/mdi/brightness-7";
-import IconDark from "virtual:vite-icons/mdi/brightness-4";
-
 export default {
   name: "AppHeader",
-  components: {
-    IconLight,
-    IconDark
-  },
   setup() {
     const isDarkClassAvailable = document.body.classList.contains("dark-theme");
 

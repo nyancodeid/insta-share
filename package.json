@@ -18,9 +18,10 @@
     "@vitejs/plugin-vue": "^1.4.0",
     "@vue/compiler-sfc": "^3.2.4",
     "sass": "^1.35.2",
+    "unplugin-icons": "^0.11.3",
+    "unplugin-vue-components": "^0.15.2",
     "vite": "^2.5.0",
     "vite-plugin-fonts": "^0.2.2",
-    "vite-plugin-icons": "^0.6.5",
     "vite-plugin-pwa": "^0.8.2"
   }
 }

@@ -12,7 +12,7 @@
         <div class="content-file--item" v-for="(item, index) in files" :key="index">
           <div class="item-content">
             <div class="item-icon">
-              <IconFile class="icon-color" />
+              <i-ri-file-list-3-line class="icon-color" />
             </div>
             <div class="item-detail">
               <span class="item-detail--title" :title="item.file.name">{{ item.file.name }}</span>
@@ -20,24 +20,24 @@
             </div>
             <div class="item-action">
               <a v-if="!!item.shorten" title="Open Shorten Link" target="_blank" :href="generateLink(item, true)" rel="noopener">
-                <IconLinkBoxActive class="icon-color" />
+                <i-ri-link-unlink-m class="icon-color" />
               </a>
               <a v-else title="Generate Shorten Link" @click="shortenLink(item)">
-                <IconLinkBox class="icon-color" />
+                <i-ri-link-m class="icon-color" />
               </a>
 
               <a title="Open Link" target="_blank" :href="generateLink(item)" rel="noopener">
-                <IconOpen class="icon-color" />
+                <i-ri-external-link-fill class="icon-color" />
               </a>
             </div>
           </div>
           <div class="item-cid">
             <label>
-              <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="`ipfs://${item.cid}`" />
+              <input class="input-cid" type="text" readonly @focus="$event.target.select()" :value="generateLink(item)" />
             </label>
 
             <a title="Copy to clipboard" @click="copyFileLink(item)">
-              <IconPaste class="icon-color" />
+              <i-ri-clipboard-line class="icon-color" />
             </a>
           </div>
         </div>
@@ -48,11 +48,6 @@
 
 <script>
 import { ref, computed, inject } from "vue";
-import IconFile from "virtual:vite-icons/ri/file-list-3-line";
-import IconOpen from "virtual:vite-icons/ri/external-link-fill";
-import IconPaste from "virtual:vite-icons/ri/clipboard-line";
-import IconLinkBoxActive from "virtual:vite-icons/ri/link-unlink-m";
-import IconLinkBox from "virtual:vite-icons/ri/link-m";
 
 import { useStore } from "@src/store";
 import { fileSize, copyToClipboard, generateLink, generateShortLink } from "@src/services/helpers";
@@ -62,12 +57,7 @@ import SearchResult from "@src/components/VUpload/SearchResult.vue";
 export default {
   name: "PanelResult",
   components: {
-    SearchResult,
-    IconFile,
-    IconOpen,
-    IconPaste,
-    IconLinkBox,
-    IconLinkBoxActive
+    SearchResult
   },
   setup() {
     const notyf = inject("notyf");

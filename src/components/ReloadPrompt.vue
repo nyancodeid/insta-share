@@ -1,12 +1,12 @@
 <template>
   <div v-if="offlineReady || needRefresh" class="pwa-toast" role="alert">
     <div class="pwa-toast--offline" v-if="offlineReady">
-      <IconOffline />
+      <i-mdi-flash-outline />
       <span>Offline Mode Ready</span>
     </div>
 
     <div class="pwa-toast--update" v-if="needRefresh">
-      <IconLoading />
+      <i-mdi-timer-sand />
       <span>Working Auto Update</span>
     </div>
   </div>
@@ -14,8 +14,6 @@
 
 <script>
 import { useRegisterSW } from "virtual:pwa-register/vue";
-import IconLoading from "virtual:vite-icons/mdi/timer-sand";
-import IconOffline from "virtual:vite-icons/mdi/flash-outline";
 
 import { watch } from '@vue/runtime-core';
 
@@ -23,10 +21,6 @@ const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
 export default {
   name: "ReloadPrompt",
-  components: {
-    IconLoading,
-    IconOffline,
-  },
   setup() {
     const watcherStop = watch([ offlineReady, needRefresh ], (now, prev) => {
       const [ offlineNow, refreshNow ] = now;

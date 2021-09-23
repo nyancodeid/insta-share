@@ -8,20 +8,15 @@
         <p>InstaShare (Instant Share) is a simple web-based application that simply upload your files to Interplanetary File System (IPFS) Network using <a href="https://infura.io/product/ipfs" target="_blank" rel="noopener">Infura API</a>.</p>
         <p>InstaShare build with Latest Web Technology that makes hopefully can access this app even in offline mode (cache-first). And the other cool thing is PWA (Progressive Web App) makes this app installable on Android devices, allow us to use this app to run native-like on an Android.</p>
 
-        <p>Build with <IconHearth class="icon-love" /> by <a href="https://github.com/nyancodeid" rel="noopener" class="author">NyanCodeID</a></p>
+        <p>Build with <i-ri-heart-2-fill class="icon-love" /> by <a href="https://github.com/nyancodeid" rel="noopener" class="author">NyanCodeID</a></p>
       </section>
     </div>
   </section>
 </template>
 
 <script>
-import IconHearth from "virtual:vite-icons/ri/heart-2-fill";
-
 export default {
   name: "VAbout",
-  components: {
-    IconHearth
-  }
 }
 </script>
 
