@@ -175,7 +175,7 @@ body,
                 align-items: flex-start;
 
                 .dropzone-label {
-                  margin-top: 1rem;
+                  margin-top: 2rem;
 
                   svg {
                     height: 42px;
@@ -224,7 +224,7 @@ body,
       .main-content {
         section {
           &#panel-result {
-            background-color: var(--gradient-800);
+            background-color: rgb(9, 16, 29);
           }
         }
       }
