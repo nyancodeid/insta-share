@@ -58,6 +58,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+  transition: border-bottom 0.5s ease;
 
   padding: 1.3em 64px;
   border-bottom: 1px solid rgb(243,244,246);
